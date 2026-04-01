@@ -1,39 +1,33 @@
-This notebook builds and evaluates 11 machine learning classifiers to distinguish three patient groups from MALDI-TOF mass spectrometry data of serum samples filtered below 3 kDa.
-Requirements:
+Before running the notebook:
 
-Install all dependencies with a single command:
-pip install numpy pandas matplotlib scikit-learn xgboost yellowbrick joblib 
-networkx tabulate openpyxl
+-Update the spectra folder path.
+-Update the classification file path.
+-Make sure the sample order matches between spectra and labels.
 
-Expected folder structure:
-paper ML chagas/
-└── chagas/
-    └── chagas/
-        ├── all spectra/  ← .txt files, one per sample
-        └── clasificacion.xlsx  ← sample labels (A, N, S)
-Each .txt file contains two columns: m/z values and intensity values separated by a space. Each spectrum contains approximately 23,040 data points.
-Update the file paths in Cell 4 (spectra folder) and Cell 16 (Excel labels) before running.
+Required packages:
 
-Pipeline
-Raw spectra (.txt)
-      ↓
-Load & concatenate  →  Dataint (23040 x n_samples)
-      ↓
-StandardScaler  →  x_scaled
-      ↓
-OrdinalEncoder  →  Y1_code  (A=0, N=1, S=2)
-      ↓
-PCA (10 components)  →  visualization + model input
-      ↓
-LDA (2 components)  →  supervised class separation plot
-      ↓
-Train / Test split 80:20
-      ↓
-11 classifiers  →  accuracy + confusion matrix + ROC/AUC
-      ↓
-Graph ML PoC  →  sample similarity network
-      ↓
-Save best models  →  .pkl files
+pip install numpy pandas matplotlib scikit-learn xgboost yellowbrick 
+joblib networkx tabulate openpyxl
+
+
+This notebook contains the machine learning workflow used to analyze MALDI-TOF 
+blood serum samples spectra and classify three patient groups. The goal is to 
+test multiple classifiers and compare their performance.
+
+The analysis includes:
+
+1. Data loading: The notebook reads spectra stored as .txt files. Each file corresponds to one sample and contains m/z and intensity values.
+2. Data preprocessing: All spectra are combined into one matrix and normalized so samples can be compared properly.
+3. Label processing: Sample classes (A, N, S) are converted into numeric values so they can be used in machine learning models.
+4. Dimensionality reduction: PCA is used to reduce noise and visualize patterns. LDA is used to visualize class separation.
+5. Model training: The dataset is split into training data (80%) and testing data (20%). Eleven classifiers are trained and compared.
+6. Model evaluation: Performance is measured using accuracy, confusion matrices, ROC curves, and AUC scores.
+7. Graph analysis: A similarity network is created to visualize relationships between samples.
+8. Model saving: The best performing models are saved as .pkl files for later use.
+
+
+Last Update:2026-March-31
+
 
 
 
