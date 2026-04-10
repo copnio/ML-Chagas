@@ -1,7 +1,14 @@
+Hello everyone!
+
+This notebook is part of my undergraduate thesis in Chemistry at Universidad Industrial de Santander (2024). 
+The goal is to build a machine learning model that can help detect Chagas disease using MALDI-TOF mass spectra from blood serum samples.
+
+IMPORTANT!!!
+
 Before running the notebook:
 
--Update the spectra folder path.
--Update the classification file path.
+-Update the spectra and classification folder path.
+
 -Make sure the sample order matches between spectra and labels.
 
 Required packages:
@@ -9,24 +16,23 @@ Required packages:
 pip install numpy pandas matplotlib scikit-learn xgboost yellowbrick 
 joblib networkx tabulate openpyxl
 
+---
 
-This notebook contains the machine learning workflow used to analyze MALDI-TOF 
-blood serum samples spectra and classify three patient groups. The goal is to 
-test multiple classifiers and compare their performance.
+The samples are classified into three groups: 
 
-The analysis includes:
+Here is what the notebook does, step by step:
 
-1. Data loading: The notebook reads spectra stored as .txt files. Each file corresponds to one sample and contains m/z and intensity values.
-2. Data preprocessing: All spectra are combined into one matrix and normalized so samples can be compared properly.
-3. Label processing: Sample classes (A, N, S) are converted into numeric values so they can be used in machine learning models.
-4. Dimensionality reduction: PCA is used to reduce noise and visualize patterns. LDA is used to visualize class separation.
-5. Model training: The dataset is split into training data (80%) and testing data (20%). Eleven classifiers are trained and compared.
-6. Model evaluation: Performance is measured using accuracy, confusion matrices, ROC curves, and AUC scores.
-7. Graph analysis: A similarity network is created to visualize relationships between samples.
-8. Model saving: The best performing models are saved as .pkl files for later use.
+Reading the data: The spectra are loaded from .txt files, each one representing a single patient sample with its m/z and intensity values.
+Preprocessing: All spectra are combined into a single matrix and normalized so they can be compared fairly across samples.
+Labels: The class labels Asymptomatic (A), Negative (N), and Symptomatic (S), are converted to numbers so the classifiers can work with them.
+Dimensionality reduction: PCA is applied to reduce noise and explore whether the three groups show any natural separation. LDA is also used to visualize how well the classes can be distinguished.
+Model training: The data is split 80/20 into training and test sets. Eleven different classifiers are trained, including SVM, Random Forest, XGBoost, neural networks, and others.
+Evaluation: Each model is evaluated using accuracy, confusion matrices, ROC curves, and AUC scores.
+Graph ML: A sample similarity network is built using cosine similarity and PCA scores, just to explore the structure of the data from a graph perspective.
+Saving the models: The best models are saved as .pkl files so they can be reused without retraining.
 
 
-Last Update:2026-March-31
+Last Update:2026-April-4
 
 
 
