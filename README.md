@@ -18,8 +18,6 @@ joblib networkx tabulate openpyxl
 
 ---
 
-The samples are classified into three groups: 
-
 Here is what the notebook does, step by step:
 
 Reading the data: The spectra are loaded from .txt files, each one representing a single patient sample with its m/z and intensity values.
